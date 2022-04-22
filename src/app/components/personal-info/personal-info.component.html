@@ -1,0 +1,83 @@
+<!-- 
+first name - text input - required
+last name - text input - required
+age - number input - required, >1990 and not future
+gender - select - required
+email - text input - email validation
+phone number - text input - required, general phone validation
+-->
+<div class="personal-info">
+  <div class="content">
+    <div class="columns">
+      <div class="column">
+        <div class="field">
+          <div>First name:</div>
+          <input [formControl]="form.get('firstName')" type="text">
+          <div class="error" *ngIf="form.get('firstName').invalid && form.get('firstName').touched">
+            Name is not specified
+          </div>
+        </div>
+
+        <div class="field">
+          <div>Last name:</div>
+          <input [formControl]="form.get('lastName')" type="text">
+          <div class="error" *ngIf="form.get('lastName').invalid && form.get('lastName').touched">
+            Name is not specified
+          </div>
+        </div>
+
+        <div class="field">
+          <div>Age:</div>
+          <input [formControl]="form.get('age')" type="number">
+          <div class="error" *ngIf="form.get('age').errors['required'] && form.get('age').touched">
+            Age is not specified
+          </div>
+          <div class="error" *ngIf="form.get('age').errors['age'] && form.get('age').touched">
+            Age is not valid
+          </div>
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="field">
+          <div>Gender:</div>
+          <label>
+            <input type="radio" value="female" name="gender" [formControl]="form.get('gender')">
+            Female
+          </label>
+
+          <label>
+            <input type="radio" value="male" name="gender" [formControl]="form.get('gender')">
+            Male
+          </label>
+          <div class="error" *ngIf="form.get('gender').invalid && form.get('gender').touched">
+            Gender is not specified
+          </div>
+        </div>
+
+        <div class="field">
+          <div>Email:</div>
+          <input [formControl]="form.get('email')" type="text">
+          <div class="error" *ngIf="form.get('email').errors['required'] && form.get('email').touched">
+            Email is not specified
+          </div>
+          <div class="error" *ngIf="form.get('email').errors['email'] && form.get('email').touched">
+            Email is not correct
+          </div>
+        </div>
+
+        <div class="field">
+          <div>Phone number:</div>
+          <input [formControl]="form.get('phoneNumber')" type="text">
+          <div class="error" *ngIf="form.get('phoneNumber').errors['required'] && form.get('phoneNumber').touched">
+            Phone number is not specified
+          </div>
+          <div class="error" *ngIf="form.get('phoneNumber').errors['pattern'] && form.get('phoneNumber').touched">
+            Phone number is not correct
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="button" (click)="submit()">Submit</div>
+  </div>
+</div>
