@@ -15,14 +15,4 @@ export class ProductCardComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  convertAmountToStr(amount: number): string {
-    if (amount < 1000) {
-      return '£' + amount;
-    } else if (amount >= 1000 && amount < 1000000) {
-      return '£' + (amount / 1000).toFixed(2) + 'k';
-    } else {
-      return '£' + (amount / 1000000).toFixed(1) + 'm';
-    }
-  } 
-
 }
