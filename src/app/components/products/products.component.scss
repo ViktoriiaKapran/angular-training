@@ -1,0 +1,14 @@
+
+.products {
+  background-color: #1f1f2f;
+
+  &__content {
+    max-width: 640px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  &__product {
+    margin-bottom: 20px;
+  }
+}

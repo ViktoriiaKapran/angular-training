@@ -1,0 +1,52 @@
+<div class="product-card">
+  <div class="card-name">
+    {{product.name}}
+  </div>
+
+  <div class="card-name2">
+    {{product.productLine}}
+  </div>
+
+  <div class="card">
+  <div class="card-characteristic">
+    <div class="characteristic">
+      <div class="characteristic-value">
+        {{(product.rate * 100).toFixed(2) + '%'}}
+      </div>
+      <div class="characteristic-label">
+        Initial rate
+      </div>
+    </div>
+    <div class="characteristic">
+      <div class="characteristic-value">
+        {{product.productType}}
+      </div>
+      <div class="characteristic-label">
+        Product type
+      </div>
+    </div>
+
+    <div class="characteristic">
+      <div class="characteristic-value">
+        {{product.minimumLoan}}
+      </div>
+      <div class="characteristic-label">
+        Min loan
+      </div>
+    </div>
+
+    <div class="characteristic">
+      <div class="characteristic-value">
+        {{convertAmountToStr(product.maximumLoan)}}
+      </div>
+      <div class="characteristic-label">
+        Max loan
+      </div>
+    </div>
+  </div>
+  <div class="buttons">
+    <div class="login">Login</div>
+    <div class="register">Register</div>
+  </div>
+</div>
+</div>
