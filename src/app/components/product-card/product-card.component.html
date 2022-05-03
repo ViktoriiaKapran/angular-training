@@ -1,52 +1,98 @@
 <div class="product-card">
-  <div class="card-name">
+  <div class="name">
     {{product.name}}
   </div>
 
-  <div class="card-name2">
+  <div class="product-line">
     {{product.productLine}}
   </div>
 
   <div class="card">
-  <div class="card-characteristic">
-    <div class="characteristic">
-      <div class="characteristic-value">
-        {{(product.rate * 100).toFixed(2) + '%'}}
+    <div class="characteristics">
+      <div class="characteristic">
+        <div class="characteristic-value">
+          {{(product.rate * 100).toFixed(2) + '%'}}
+        </div>
+        <div class="characteristic-label">
+          Initial rate
+        </div>
       </div>
-      <div class="characteristic-label">
-        Initial rate
+      <div class="characteristic">
+        <div class="characteristic-value">
+          {{purposesToStr(product.purposes)}}
+        </div>
+        <div class="characteristic-label">
+          Type
+        </div>
+      </div>
+
+      <div class="characteristic">
+        <div class="characteristic-value">
+          {{product.minimumLoan}}
+        </div>
+        <div class="characteristic-label">
+          Min loan
+        </div>
+      </div>
+
+      <div class="characteristic">
+        <div class="characteristic-value">
+          {{product.maximumLoan | amountToStr}}
+        </div>
+        <div class="characteristic-label">
+          Max loan
+        </div>
       </div>
     </div>
-    <div class="characteristic">
-      <div class="characteristic-value">
-        {{product.productType}}
+    <div class="buttons">
+      <div class="login">Login</div>
+      <div class="register">Register</div>
+    </div>
+  </div>
+
+  <div class="toggle-button" [class.opened]="isOpened" (click)="isOpened = !isOpened">
+    {{isOpened ? 'Less information' : 'More information'}}
+  </div>
+
+  <div class="more-information" dropdown [opened]="isOpened">
+    <div class="container">
+      <div class="characteristics small">
+        <div class="characteristic">
+          <div class="characteristic-value">
+            {{product.productType}}
+          </div>
+          <div class="characteristic-label">
+            Product type
+          </div>
+        </div>
+  
+        <div class="characteristic">
+          <div class="characteristic-value">
+            {{product.earlyRepaymentCharges ? 'Yes' : 'Null'}}
+          </div>
+          <div class="characteristic-label">
+            ERC
+          </div>
+        </div>
+  
+        <div class="characteristic">
+          <div class="characteristic-value">
+            {{product.reversionProductType + '+' + (product.reversionMargin* 100).toFixed(2) + '%'}}
+          </div>
+          <div class="characteristic-label">
+            Reversion rate
+          </div>
+        </div>
       </div>
-      <div class="characteristic-label">
-        Product type
+      <div class="features">
+        <div class="label">
+          Features
+        </div>
+          <div class="feature-name" *ngFor="let feature of product.features[0].features">
+            {{feature.name}}
+          </div>
       </div>
     </div>
 
-    <div class="characteristic">
-      <div class="characteristic-value">
-        {{product.minimumLoan}}
-      </div>
-      <div class="characteristic-label">
-        Min loan
-      </div>
-    </div>
-
-    <div class="characteristic">
-      <div class="characteristic-value">
-        {{product.maximumLoan | amountToStr}}
-      </div>
-      <div class="characteristic-label">
-        Max loan
-      </div>
-    </div>
   </div>
-  <div class="buttons">
-    <div class="login">Login</div>
-    <div class="register">Register</div>
-  </div>
-</div>
 </div>

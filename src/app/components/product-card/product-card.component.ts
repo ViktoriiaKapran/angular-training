@@ -9,10 +9,15 @@ import { Product } from 'src/app/models/product';
 export class ProductCardComponent implements OnInit {
 
   @Input() product: Product;
+  isOpened: boolean;
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  purposesToStr(purposes: string[]): string {
+    return purposes.join('/');
   }
 
 }

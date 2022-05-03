@@ -8,6 +8,7 @@ import { PersonalInfoComponent } from './components/personal-info/personal-info.
 import { ProductsComponent } from './components/products/products.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { ConvertAmountToStr } from './pipes/convert-amount-to-str.pipe';
+import { DropdownDirective } from './directives/dropdown.directive';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { ConvertAmountToStr } from './pipes/convert-amount-to-str.pipe';
     PersonalInfoComponent,
     ProductsComponent,
     ProductCardComponent,
-    ConvertAmountToStr
+    ConvertAmountToStr,
+    DropdownDirective,
   ],
   imports: [
     BrowserModule,
