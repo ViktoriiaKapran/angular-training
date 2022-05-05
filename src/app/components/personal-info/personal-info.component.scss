@@ -39,4 +39,8 @@
   background-color: rgb(33, 97, 33);
   color: white;
   margin: auto;
+
+  & + .button {
+    margin-top: 16px;
+  }
 }

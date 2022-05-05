@@ -88,7 +88,7 @@
         <div class="label">
           Features
         </div>
-          <div class="feature-name" *ngFor="let feature of product.features[0].features">
+          <div class="feature-name" *ngFor="let feature of getFeatures(product)">
             {{feature.name}}
           </div>
       </div>

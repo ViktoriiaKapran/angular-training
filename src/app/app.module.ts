@@ -9,6 +9,7 @@ import { ProductsComponent } from './components/products/products.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { ConvertAmountToStr } from './pipes/convert-amount-to-str.pipe';
 import { DropdownDirective } from './directives/dropdown.directive';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { DropdownDirective } from './directives/dropdown.directive';
     ProductCardComponent,
     ConvertAmountToStr,
     DropdownDirective,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,

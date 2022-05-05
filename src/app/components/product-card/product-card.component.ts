@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Product } from 'src/app/models/product';
+import { Feature, Product } from 'src/app/models/product';
 
 @Component({
   selector: 'app-product-card',
@@ -14,6 +14,14 @@ export class ProductCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  getFeatures(product: Product): Feature[] {
+    if (product.features) {
+      return product.features[0].features;
+    } else {
+      return [];
+    }
   }
 
   purposesToStr(purposes: string[]): string {

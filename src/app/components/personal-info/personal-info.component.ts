@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-personal-info',
@@ -9,7 +10,7 @@ import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } fro
 export class PersonalInfoComponent implements OnInit {
 
   form: FormGroup;
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
     //     first name - text input - required
@@ -42,11 +43,16 @@ export class PersonalInfoComponent implements OnInit {
     });
     console.log(this.form.value);
   }
+
   ageValidator(control: FormControl): ValidationErrors {
-         
-    if(control.value != null && (control.value < 1 || control.value > 100)){
-        return {age: true};
+
+    if (control.value != null && (control.value < 1 || control.value > 100)) {
+      return { age: true };
     }
     return null;
-}
+  }
+
+  navigateToProducts() {
+    this.router.navigate(['products']);
+  }
 }

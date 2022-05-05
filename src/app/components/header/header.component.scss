@@ -1,0 +1,21 @@
+.header {
+  background-color: #2727d8;
+
+  .navigation {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    .item {
+      color: #fff;
+      margin: 20px 16px;
+      font-size: 19px;
+      line-height: 26px;
+      cursor: pointer;
+
+      &:hover {
+        color: #f2e67c;
+      }
+    }
+  }
+}
