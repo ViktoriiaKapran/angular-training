@@ -10,6 +10,7 @@ export class Product {
   reversionMargin: number;
   reversionProductType: string;
   features: ProductFeature[];
+  id: string;
 }
 
 export class Feature {

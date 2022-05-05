@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Feature, Product } from 'src/app/models/product';
 
 @Component({
@@ -9,9 +10,10 @@ import { Feature, Product } from 'src/app/models/product';
 export class ProductCardComponent implements OnInit {
 
   @Input() product: Product;
+  @Input() index: number;
   isOpened: boolean;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -26,6 +28,15 @@ export class ProductCardComponent implements OnInit {
 
   purposesToStr(purposes: string[]): string {
     return purposes.join('/');
+  }
+
+  select(id: string) {
+    this.router.navigate(['products/', id], 
+    {
+      queryParams: {
+        'index': this.index
+      }
+    });
   }
 
 }
