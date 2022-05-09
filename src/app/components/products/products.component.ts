@@ -11,6 +11,7 @@ import { ProductService } from 'src/app/services/product.service';
 export class ProductsComponent implements OnInit {
 
   products: Product[];
+  greenBackground: boolean;
 
   constructor(private productService: ProductService) { }
 
@@ -21,6 +22,10 @@ export class ProductsComponent implements OnInit {
         console.log(this.products);
       }
     });
+  }
+
+  changeColor(isOpened: boolean) {
+    this.greenBackground = isOpened;
   }
 
 }

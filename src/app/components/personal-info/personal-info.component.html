@@ -32,7 +32,7 @@ phone number - text input - required, general phone validation
           <div class="error" *ngIf="form.get('age').errors['required'] && form.get('age').touched">
             Age is not specified
           </div>
-          <div class="error" *ngIf="form.get('age').errors['age'] && form.get('age').touched">
+          <div class="error" *ngIf="form.get('age').errors['invalidAge'] && form.get('age').touched">
             Age is not valid
           </div>
         </div>

@@ -6,7 +6,6 @@ import {
   Input,
   OnChanges,
   OnInit,
-  Renderer2,
   SimpleChanges
 } from '@angular/core';
 
@@ -21,7 +20,7 @@ export class DropdownDirective implements OnInit, AfterViewInit, OnChanges{
 
   hostEl;
 
-  constructor(private renderer: Renderer2, el: ElementRef) {
+  constructor(el: ElementRef) {
     this.hostEl = el.nativeElement;
     this.hostEl.style.overflow = 'hidden';
     this.hostEl.style.display = 'flex';

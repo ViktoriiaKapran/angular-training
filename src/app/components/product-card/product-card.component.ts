@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Feature, Product } from 'src/app/models/product';
 
@@ -11,6 +11,7 @@ export class ProductCardComponent implements OnInit {
 
   @Input() product: Product;
   @Input() index: number;
+  @Output() isOpenedChange = new EventEmitter<boolean>();
   isOpened: boolean;
 
   constructor(private router: Router) { }
@@ -37,6 +38,11 @@ export class ProductCardComponent implements OnInit {
         'index': this.index
       }
     });
+  }
+
+  toggle() {
+    this.isOpened = !this.isOpened;
+    this.isOpenedChange.emit(this.isOpened);
   }
 
 }

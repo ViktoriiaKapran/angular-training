@@ -1,7 +1,12 @@
 
 .products {
   background-color: #1f1f2f;
+  transition: background-color 1s;
 
+  &.green {
+    background-color: rgb(216, 213, 19);
+  }
+  
   &__content {
     max-width: 640px;
     width: 100%;

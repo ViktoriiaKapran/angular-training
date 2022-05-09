@@ -47,7 +47,7 @@ export class PersonalInfoComponent implements OnInit {
   ageValidator(control: FormControl): ValidationErrors {
 
     if (control.value != null && (control.value < 1 || control.value > 100)) {
-      return { age: true };
+      return { invalidAge: true };
     }
     return null;
   }
