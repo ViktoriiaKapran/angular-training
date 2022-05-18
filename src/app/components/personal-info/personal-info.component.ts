@@ -1,3 +1,4 @@
+import { getInstructionStatements } from '@angular/compiler/src/render3/view/util';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -43,16 +44,18 @@ export class PersonalInfoComponent implements OnInit {
 
 
   ngOnInit(): void {
+    let data = JSON.parse(localStorage.getItem('personal-info'));
     this.form = this.formBuilder.group({
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
-      age: [null, [Validators.required, this.ageValidator]],
-      gender: ['', [Validators.required]],
-      email: ['', [Validators.email, Validators.required]],
-      phoneNumber: ['', [Validators.required,
+      firstName: [data?.firstName, [Validators.required]],
+      lastName: [data?.lastName, [Validators.required]],
+      age: [data?.age, [Validators.required, this.ageValidator]],
+      gender: [data?.gender, [Validators.required]],
+      email: [data?.email, [Validators.email, Validators.required]],
+      phoneNumber: [data?.phoneNumber, [Validators.required,
       Validators.pattern('(([+][(]?[0-9]{1,3}[)]?)|([(]?[0-9]{4}[)]?))\s*[)]?[-\s\.]?[(]?[0-9]{1,3}[)]?([-\s\.]?[0-9]{3})([-\s\.]?[0-9]{3,4})')]],
-      titleControl: ['', Validators.required]
+      titleControl: [data?.titleControl, Validators.required]
     });
+
     this.form.get('lastName').valueChanges.subscribe((value: string) => {
       if (value?.toLowerCase() == 'путин') {
         setTimeout(() => {
@@ -63,10 +66,15 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   submit() {
-    Object.keys(this.form.controls).forEach((controlName) => {
-      this.form.get(controlName).markAsTouched();
-    });
+    if (this.form.invalid) {
+      Object.keys(this.form.controls).forEach((controlName) => {
+        this.form.get(controlName).markAsTouched();
+      });
+    } else {
+      localStorage.setItem('personal-info', JSON.stringify(this.form.value));
+    }
     console.log(this.form.value);
+
   }
 
   ageValidator(control: FormControl): ValidationErrors {
