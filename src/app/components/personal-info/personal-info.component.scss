@@ -1,11 +1,31 @@
 .field {
   padding-bottom: 24px;
   position: relative;
-  .error {
-    position: absolute;
-    font-size: 12px;
-    color: rgb(212, 59, 59);
-  }
+  min-height: 95px;
+  // .error {
+  //   position: absolute;
+  //   font-size: 12px;
+  //   color: rgb(212, 59, 59);
+  // }
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.error {
+  color: #f44336;
+  font-size: 75%;
+  margin-top: 0.6666666667em;
+  padding: 0 1em;
+  position: absolute;
+  box-sizing: border-box;
+  width: 100%;
+  overflow: hidden;
+  line-height: 1.125;
+}
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
 }
 
 .personal-info {
@@ -16,7 +36,7 @@
   border: 1px solid grey;
   border-radius: 8px;
   padding: 16px;
-  max-width: 360px;
+  max-width: 500px;
   width: 100%;
   position: absolute;
   left: 50%;

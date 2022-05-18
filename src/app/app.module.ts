@@ -11,6 +11,9 @@ import { ConvertAmountToStr } from './pipes/convert-amount-to-str.pipe';
 import { DropdownDirective } from './directives/dropdown.directive';
 import { HeaderComponent } from './components/header/header.component';
 import { ProductPageComponent } from './components/product-page/product-page.component';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MaterialExampleModule} from './material.module';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,10 @@ import { ProductPageComponent } from './components/product-page/product-page.com
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NoopAnimationsModule,
+    BrowserAnimationsModule,
+    MatNativeDateModule,
+    MaterialExampleModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

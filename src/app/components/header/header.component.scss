@@ -1,5 +1,8 @@
 .header {
   background-color: #2727d8;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
 
   .navigation {
     display: flex;
