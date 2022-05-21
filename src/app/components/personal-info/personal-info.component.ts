@@ -1,46 +1,60 @@
 import { getInstructionStatements } from '@angular/compiler/src/render3/view/util';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-class Title {
+class SelectableItem {
   value: string;
   viewValue: string;
 }
+
+// class PenisDialogModel {
+//   penisLength: number;
+// }
+
 @Component({
   selector: 'app-personal-info',
   templateUrl: './personal-info.component.html',
   styleUrls: ['./personal-info.component.scss']
 })
+
 export class PersonalInfoComponent implements OnInit {
 
   form: FormGroup;
-  titles: Title[] = [
-    {value: 'mrs', viewValue: 'Mrs'},
-    {value: 'ms', viewValue: 'Ms'},
-    {value: 'mr', viewValue: 'Mr'},
-    {value: 'miss', viewValue: 'Miss'},
-    {value: 'mx', viewValue: 'Mx'},
-    {value: 'master', viewValue: 'Master'},
-    {value: 'brigadier', viewValue: 'Brigadier'},
-    {value: 'commander', viewValue: 'Commander'},
-    {value: 'councillor', viewValue: 'Councillor'},
-    {value: 'colonel', viewValue: 'Colonel'},
-    {value: 'corporal', viewValue: 'Corporal'},
-    {value: 'dame', viewValue: 'Dame'},
-    {value: 'dr', viewValue: 'Dr'},
-    {value: 'earl', viewValue: 'Earl'},
-    {value: 'general', viewValue: 'General'},
-    {value: 'lady', viewValue: 'Lady'},
-    {value: 'lord', viewValue: 'Lord'},
-    {value: 'major', viewValue: 'Major'},
-    {value: 'private', viewValue: 'Private'},
-    {value: 'professor', viewValue: 'Professor'},
-    {value: 'reverend', viewValue: 'Reverend'},
-    {value: 'sir', viewValue: 'Sir'},
+  titles: SelectableItem[] = [
+    { value: 'mrs', viewValue: 'Mrs' },
+    { value: 'ms', viewValue: 'Ms' },
+    { value: 'mr', viewValue: 'Mr' },
+    { value: 'miss', viewValue: 'Miss' },
+    { value: 'mx', viewValue: 'Mx' },
+    { value: 'master', viewValue: 'Master' },
+    { value: 'brigadier', viewValue: 'Brigadier' },
+    { value: 'commander', viewValue: 'Commander' },
+    { value: 'councillor', viewValue: 'Councillor' },
+    { value: 'colonel', viewValue: 'Colonel' },
+    { value: 'corporal', viewValue: 'Corporal' },
+    { value: 'dame', viewValue: 'Dame' },
+    { value: 'dr', viewValue: 'Dr' },
+    { value: 'earl', viewValue: 'Earl' },
+    { value: 'general', viewValue: 'General' },
+    { value: 'lady', viewValue: 'Lady' },
+    { value: 'lord', viewValue: 'Lord' },
+    { value: 'major', viewValue: 'Major' },
+    { value: 'private', viewValue: 'Private' },
+    { value: 'professor', viewValue: 'Professor' },
+    { value: 'reverend', viewValue: 'Reverend' },
+    { value: 'sir', viewValue: 'Sir' },
   ];
 
-  constructor(private formBuilder: FormBuilder, private router: Router) { }
+  genders: SelectableItem[] = [
+    { value: 'Female', viewValue: 'Female' },
+    { value: 'Male', viewValue: 'Male' }
+  ];
+
+  penisLength: number;
+
+  constructor(private formBuilder: FormBuilder, private router: Router, public dialog: MatDialog) { }
 
 
   ngOnInit(): void {
@@ -59,10 +73,19 @@ export class PersonalInfoComponent implements OnInit {
     this.form.get('lastName').valueChanges.subscribe((value: string) => {
       if (value?.toLowerCase() == 'путин') {
         setTimeout(() => {
-          alert('Іди нахуй!!!')
+          alert('Іди нахуй!')
         }, 0);
       }
     });
+
+    this.form.get('gender').valueChanges.subscribe((value: string) => {
+      if (value == 'Male') {
+        this.penisLength = 0;
+      } else {
+        this.penisLength = null;
+      }
+    });
+
   }
 
   submit() {
@@ -88,4 +111,21 @@ export class PersonalInfoComponent implements OnInit {
   navigateToProducts() {
     this.router.navigate(['products']);
   }
+
 }
+
+// @Component({
+//   selector: 'personal-info-dialog',
+//   templateUrl: './personal-info-dialog.html',
+// })
+// export class PersonalInfoDialog {
+//   constructor(
+//     public dialogRef: MatDialogRef<PersonalInfoDialog>,
+//     @Inject(MAT_DIALOG_DATA) public data: PenisDialogModel,
+//   ) {}
+
+//   onNoClick(): void {
+//     this.dialogRef.close();
+//   }
+// }
+

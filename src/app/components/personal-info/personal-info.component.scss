@@ -32,9 +32,8 @@
   position: relative;
   min-height: 100vh;
 }
-.content {
-  border: 1px solid grey;
-  border-radius: 8px;
+
+.mat-card {
   padding: 16px;
   max-width: 500px;
   width: 100%;
@@ -44,23 +43,64 @@
   transform: translate(-50%, -50%);
 }
 
+// .content {
+//   border: 1px solid grey;
+//   border-radius: 8px;
+//   padding: 16px;
+//   max-width: 500px;
+//   width: 100%;
+//   position: absolute;
+//   left: 50%;
+//   top: 50%;
+//   transform: translate(-50%, -50%);
+// }
+
 .columns {
   display: flex;
   justify-content: space-between;
 }
 
-.button {
-  border-radius: 8px;
-  width: 160px;
-  height: 40px;
-  text-align: center;
-  line-height: 40px;
-  text-transform: uppercase;
-  background-color: rgb(33, 97, 33);
-  color: white;
-  margin: auto;
+// .button {
+//   border-radius: 8px;
+//   width: 160px;
+//   height: 40px;
+//   text-align: center;
+//   line-height: 40px;
+//   text-transform: uppercase;
+//   background-color: rgb(33, 97, 33);
+//   color: white;
+//   margin: auto;
 
-  & + .button {
-    margin-top: 16px;
+//   & + .button {
+//     margin-top: 16px;
+//   }
+//   }
+
+.penis {
+  display: flex;
+
+  img {
+    height: 60px;
+  }
+}
+
+.slider {
+  display: flex;
+  align-items: center;
+  height: 24px;
+
+  .text {
+    margin: 0 8px;
+  }
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  max-width: 120px;
+
+  .button + .button {
+    margin-top: 10px;
   }
 }
