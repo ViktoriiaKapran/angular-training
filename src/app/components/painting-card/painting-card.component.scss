@@ -1,0 +1,16 @@
+.card {
+  margin: 20px;
+
+  .example-card {
+    max-width: 400px;
+
+    .information-of-painting{
+      font-size: 15px;
+      .price {
+        color: rgb(19, 102, 137);
+        font-size: 20px;
+      }
+    }
+
+  }
+}

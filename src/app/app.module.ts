@@ -14,6 +14,9 @@ import { ProductPageComponent } from './components/product-page/product-page.com
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MaterialExampleModule} from './material.module';
+import { GalleryComponent } from './components/gallery/gallery.component';
+import { PaintingService } from './services/painting.service';
+import { PaintingCardComponent } from './components/painting-card/painting-card.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +29,8 @@ import {MaterialExampleModule} from './material.module';
     DropdownDirective,
     HeaderComponent,
     ProductPageComponent,
+    GalleryComponent,
+    PaintingCardComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +43,7 @@ import {MaterialExampleModule} from './material.module';
     MatNativeDateModule,
     MaterialExampleModule,
   ],
-  providers: [],
+  providers: [PaintingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
