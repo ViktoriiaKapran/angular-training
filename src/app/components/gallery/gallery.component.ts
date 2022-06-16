@@ -20,6 +20,7 @@ export class GalleryComponent implements OnInit {
         console.log(this.paintings);
       }
     });
+
   }
 
 }

@@ -1,0 +1,49 @@
+<div class="painting-page" *ngIf="painting && artist">
+  <div class="image">
+    <mat-card>
+      <img mat-card-image [src]="imagePath">
+    </mat-card>
+  </div>
+  <div class="painting-information">
+    <div class="about-painting">
+      <mat-card>
+        <div class="painting-name">{{painting.name}}</div>
+        <div class="details">
+          <div class="label">Author:</div>
+          <div class="value">{{painting.author}}</div>
+        </div>
+        <div class="details">
+          <div class="label">Genre:</div>
+          <div class="value">{{painting.genres}}</div>
+        </div>
+        <div class="details">
+          <div class="label">Size:</div>
+          <div class="value">{{painting.height}} x {{painting.width}} (cm)</div>
+        </div>
+        <div class="details">
+          <div class="label">Description:</div>
+          <div class="value">{{painting.description}}</div>
+        </div>
+      </mat-card>
+    </div>
+    <div class="painting-price">
+      <mat-card>{{painting.price}} BYN</mat-card>
+    </div>
+    <div>
+      <mat-card>
+        <div class="contacts">Contacts</div>
+        <div class="details">
+          <div class="label">Phone number:</div>
+          <div class="value"><a [href]="'tel:' + artist.phone">{{artist.phone}}</a></div>
+        </div>
+        <div class="details">
+          <div class="label">Email:</div>
+          <div class="value"><a [href]="'mailto:' + artist.email">{{artist.email}}</a></div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>
+<div class="loader" *ngIf="!painting || !artist">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>

@@ -1,5 +1,10 @@
-<div class="paintings">
+<div class="paintings" *ngIf="paintings">
   <div *ngFor="let painting of paintings">
-    <app-painting-card [painting]="painting"></app-painting-card>
+    <div class="card">
+      <app-painting-card [painting]="painting"></app-painting-card>
+    </div>
   </div>
+</div>
+<div class="loader" *ngIf="!paintings">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </div>

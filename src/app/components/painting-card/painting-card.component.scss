@@ -1,16 +1,31 @@
-.card {
-  margin: 20px;
+.painting-card {
+  max-width: 300px;
+  line-height: 24px;
 
-  .example-card {
-    max-width: 400px;
+  .image {
+    height: 300px;
+    width: 300px;
+  }
 
-    .information-of-painting{
-      font-size: 15px;
-      .price {
-        color: rgb(19, 102, 137);
-        font-size: 20px;
+  .column {
+    display: flex;
+    justify-content: space-between;
+
+    .information-of-painting {
+      .painting-name {
+        font-weight: 600;
+      }
+
+      .painting-author {
+        font-weight: 400;
       }
     }
 
+    .painting-price {
+      color: rgb(19, 102, 137);
+      font-size: 20px;
+      font-weight: 300;
+    }
   }
 }
+

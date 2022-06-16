@@ -17,6 +17,8 @@ import {MaterialExampleModule} from './material.module';
 import { GalleryComponent } from './components/gallery/gallery.component';
 import { PaintingService } from './services/painting.service';
 import { PaintingCardComponent } from './components/painting-card/painting-card.component';
+import { PaintingPageComponent } from './components/painting-page/painting-page.component';
+import { UserService } from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { PaintingCardComponent } from './components/painting-card/painting-card.
     HeaderComponent,
     ProductPageComponent,
     GalleryComponent,
-    PaintingCardComponent
+    PaintingCardComponent,
+    PaintingPageComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,7 @@ import { PaintingCardComponent } from './components/painting-card/painting-card.
     MatNativeDateModule,
     MaterialExampleModule,
   ],
-  providers: [PaintingService],
+  providers: [PaintingService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
