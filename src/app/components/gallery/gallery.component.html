@@ -1,10 +1,39 @@
-<div class="paintings" *ngIf="paintings">
-  <div *ngFor="let painting of paintings">
-    <div class="card">
-      <app-painting-card [painting]="painting"></app-painting-card>
+<div class="gallery">
+  <div *ngIf="paintings">
+    <div class="filters" *ngIf="parameters">
+      <button mat-raised-button [matMenuTriggerFor]="sizes">Sizes</button>
+      <mat-menu #sizes>
+        <div class="filter-popup" (click)="$event.stopPropagation()">
+          <app-range [label]="'Wihth'" [placeholder1]="parameters.minWidth + 'cm'" [formControl1]="form.get('width_from')"
+            [placeholder2]="parameters.maxWidth + 'cm'" [formControl2]="form.get('width_to')">
+          </app-range>
+        </div>
+        <div class="filter-popup" (click)="$event.stopPropagation()">
+          <app-range [label]="'Height'" [placeholder1]="parameters.minHeight + 'cm'" [formControl1]="form.get('height_from')"
+            [placeholder2]="parameters.maxHeight + 'cm'" [formControl2]="form.get('height_to')">
+          </app-range>
+        </div>
+      </mat-menu>
+      <button mat-raised-button [matMenuTriggerFor]="price">Price</button>
+      <mat-menu #price>
+        <div class="filter-popup" (click)="$event.stopPropagation()">
+          <app-range [label]="'Price'" [placeholder1]="parameters.minPrice + ' BYN'" [formControl1]="form.get('price_from')"
+            [placeholder2]="parameters.maxPrice + ' BYN'" [formControl2]="form.get('price_to')">
+          </app-range>
+        </div>
+      </mat-menu>
+      <button mat-button (click)="getPaintings()">Apply</button>
+      <button mat-button (click)="clear()">Clear</button>
+    </div>
+    <div class="paintings">
+      <div *ngFor="let painting of paintings">
+        <div class="card">
+          <app-painting-card [painting]="painting"></app-painting-card>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-<div class="loader" *ngIf="!paintings">
-  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  <div class="loader" *ngIf="!paintings">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
 </div>

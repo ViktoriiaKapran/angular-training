@@ -19,6 +19,7 @@ import { PaintingService } from './services/painting.service';
 import { PaintingCardComponent } from './components/painting-card/painting-card.component';
 import { PaintingPageComponent } from './components/painting-page/painting-page.component';
 import { UserService } from './services/user.service';
+import { RangeComponent } from './range/range.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { UserService } from './services/user.service';
     ProductPageComponent,
     GalleryComponent,
     PaintingCardComponent,
-    PaintingPageComponent
+    PaintingPageComponent,
+    RangeComponent
   ],
   imports: [
     BrowserModule,

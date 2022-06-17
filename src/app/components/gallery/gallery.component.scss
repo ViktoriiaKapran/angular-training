@@ -1,11 +1,39 @@
-.paintings {
-
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  max-width: 1500px;
-
-  .card {
-    margin: 10px;
+.gallery {
+  
+  .paintings {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 1500px;
+  
+    .card {
+      margin: 10px;
+    }
   }
 }
+
+  .filter-popup {
+    display: flex;
+    flex-direction: column;
+  
+    .input-label {
+      font-size: 10px;
+      color:rgb(120, 126, 126);
+      margin-left: 10px;
+      margin-bottom: -10px;;
+    }
+  
+    .range {
+      display: flex;
+      align-items: center;
+    }
+  
+    .input-wrapper {
+      max-width: 100px;
+      overflow: hidden;
+      margin: 0 10px;
+    }
+  }
+
+
+
