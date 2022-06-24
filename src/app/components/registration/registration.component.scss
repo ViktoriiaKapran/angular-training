@@ -1,0 +1,35 @@
+.registration-page {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  .img {
+    max-width: 550px;
+    margin-right: 50px;
+  }
+  .registration {
+    display: flex;
+    flex-direction: column;
+    .title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .subtitle {
+      font-size: 12px;
+      font-weight: 300;
+      margin-bottom: 20px;
+    }
+    .field {
+      width: 400px;
+      .example-full-width {
+        width: 100%;
+      }
+    }
+    .button {
+      background-color: #2727d8;
+      color: #FFF;
+      max-width: 90px;
+    }
+  }
+
+}

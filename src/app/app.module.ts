@@ -19,7 +19,8 @@ import { PaintingService } from './services/painting.service';
 import { PaintingCardComponent } from './components/painting-card/painting-card.component';
 import { PaintingPageComponent } from './components/painting-page/painting-page.component';
 import { UserService } from './services/user.service';
-import { RangeComponent } from './range/range.component';
+import { RangeComponent } from './components/range/range.component';
+import { RegistrationComponent } from './components/registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { RangeComponent } from './range/range.component';
     GalleryComponent,
     PaintingCardComponent,
     PaintingPageComponent,
-    RangeComponent
+    RangeComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
