@@ -43,8 +43,8 @@ export class RegistrationComponent implements OnInit {
       role: 'Artist',
       phone: this.form.get('phoneNumber').value,
     }
-    this.userService.createUser(user).subscribe((request) => {
-      if (request.success) {
+    this.userService.createUser(user).subscribe((response) => {
+      if (response.success) {
         this.router.navigate(['gallery']);
       }
     });

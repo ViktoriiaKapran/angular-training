@@ -21,6 +21,8 @@ import { PaintingPageComponent } from './components/painting-page/painting-page.
 import { UserService } from './services/user.service';
 import { RangeComponent } from './components/range/range.component';
 import { RegistrationComponent } from './components/registration/registration.component';
+import { LoginComponent } from './components/login/login.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,8 @@ import { RegistrationComponent } from './components/registration/registration.co
     PaintingCardComponent,
     PaintingPageComponent,
     RangeComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +53,7 @@ import { RegistrationComponent } from './components/registration/registration.co
     MatNativeDateModule,
     MaterialExampleModule,
   ],
-  providers: [PaintingService, UserService],
+  providers: [PaintingService, UserService, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

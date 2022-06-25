@@ -1,0 +1,22 @@
+.form {
+  width: 300px;
+  margin: 16px auto 16px;
+  .example-full-width {
+    width: 100%;
+  }
+}
+
+.buttons {
+  margin-bottom: 6px;
+  .button {
+    background-color: #470ed6;
+    color: #fff;
+    margin-right: 20px;
+  }
+}
+
+.error {
+  color: #FF0000;
+  min-height: 16px;
+  font-size: 12px;
+}

@@ -3,11 +3,11 @@
   position: fixed;
   width: 100%;
   z-index: 1;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 
   .navigation {
-    display: flex;
-    justify-content: center;
-    width: 100%;
 
     .item {
       color: #fff;
@@ -20,5 +20,20 @@
         color: #f2e67c;
       }
     }
+  }
+  .button {
+    color:#fff;
+    background-color: #2300a0;
+    max-height: 32px;
+    text-align: center;
+    font-weight: 400;
+
+    &:hover {
+      color: #f2e67c;
+    }
+  }
+
+  .current-user {
+    color: #fff;
   }
 }

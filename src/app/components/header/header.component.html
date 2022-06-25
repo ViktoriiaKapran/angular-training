@@ -4,4 +4,6 @@
     <!-- <div class="item" routerLink="personal-info">Personal info</div> -->
     <!-- <div class="item" routerLink="products">Products</div> -->
   </nav>
+  <button mat-raised-button *ngIf="!contextService.getUser()" class="button" (click)="openLoginPopup()">Sign In / Sign Up</button>
+  <div class="current-user" *ngIf="contextService.getUser()">{{getUserFullName()}}</div>
 </div>
