@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule }   from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS }   from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PersonalInfoComponent} from './components/personal-info/personal-info.component';
@@ -23,6 +23,9 @@ import { RangeComponent } from './components/range/range.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { LoginComponent } from './components/login/login.component';
 import { CookieService } from 'ngx-cookie-service';
+import { UsersComponent } from './components/users/users.component';
+import { JwtInterceptor } from './interceptors/jwt-interceptor';
+import { AdminGuard } from './guards/admin-guard';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,8 @@ import { CookieService } from 'ngx-cookie-service';
     PaintingPageComponent,
     RangeComponent,
     RegistrationComponent,
-    LoginComponent
+    LoginComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +57,8 @@ import { CookieService } from 'ngx-cookie-service';
     MatNativeDateModule,
     MaterialExampleModule,
   ],
-  providers: [PaintingService, UserService, CookieService],
+  providers: [PaintingService, UserService, CookieService, 
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}, AdminGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { ContextService } from 'src/app/services/context.service';
 import { LoginComponent } from '../login/login.component';
 
@@ -10,7 +11,8 @@ import { LoginComponent } from '../login/login.component';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(public dialog: MatDialog, public contextService: ContextService,) { }
+  constructor(public dialog: MatDialog, public contextService: ContextService,
+    private router: Router,) { }
 
   ngOnInit(): void {
   }
@@ -21,6 +23,15 @@ export class HeaderComponent implements OnInit {
 
   getUserFullName() {
     return this.contextService.getUser().firstName + ' ' + this.contextService.getUser().lastName;
+  }
+
+  goToUsers() {
+    this.router.navigate(['users']);
+  }
+
+  logOut() {
+    this.contextService.setUser(null);
+    this.contextService.setAuthToken('');
   }
 
 }

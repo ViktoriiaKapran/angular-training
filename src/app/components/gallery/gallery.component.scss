@@ -12,6 +12,14 @@
   }
 }
 
+.filters {
+  display: flex;
+  margin-left: 50px;
+  margin-top: 10px;
+  .filter {
+    margin-right: 16px;
+
+  }
   .filter-popup {
     display: flex;
     flex-direction: column;
@@ -34,6 +42,8 @@
       margin: 0 10px;
     }
   }
+}
+
 
 
 

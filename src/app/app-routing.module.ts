@@ -6,6 +6,8 @@ import { PersonalInfoComponent } from './components/personal-info/personal-info.
 import { ProductPageComponent } from './components/product-page/product-page.component';
 import { ProductsComponent } from './components/products/products.component';
 import { RegistrationComponent } from './components/registration/registration.component';
+import { UsersComponent } from './components/users/users.component';
+import { AdminGuard } from './guards/admin-guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'gallery', pathMatch:'full' },
@@ -14,7 +16,8 @@ const routes: Routes = [
   { path: 'personal-info', component: PersonalInfoComponent},
   { path: 'gallery', component: GalleryComponent},
   { path: 'gallery/:id', component: PaintingPageComponent},
-  { path: 'registration', component: RegistrationComponent}
+  { path: 'registration', component: RegistrationComponent},
+  { path: 'users', component: UsersComponent, canActivate: [AdminGuard]},
 ];
 
 @NgModule({

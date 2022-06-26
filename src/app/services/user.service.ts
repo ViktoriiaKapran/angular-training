@@ -6,6 +6,7 @@ import { AuthUser } from '../models/auth-user';
 import { AuthUserResponse } from '../models/auth-user-response';
 import { User } from '../models/user';
 import { UserResponse } from '../models/user-response';
+import { UsersResponse } from '../models/users-response';
 
 
 @Injectable({
@@ -24,6 +25,10 @@ export class UserService {
   }
 
   authUser(user: AuthUser): Observable<AuthUserResponse> {
-    return this.http.post<AuthUserResponse>(HOST + '/users/auth', user)
+    return this.http.post<AuthUserResponse>(HOST + '/users/auth', user);
+  }
+
+  getUsers(): Observable<UsersResponse> {
+    return this.http.get<UsersResponse>(HOST + '/users');
   }
 }
