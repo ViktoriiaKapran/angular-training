@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
+import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confirmation.component';
 
 @Component({
   selector: 'app-users',
@@ -20,11 +22,12 @@ export class UsersComponent implements OnInit {
   currentPage: number = 1;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatTable) table: MatTable<User>;
 
-  constructor(private userServise: UserService) { }
+  constructor(private userService: UserService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.userServise.getUsers().subscribe((response) => {
+    this.userService.getUsers().subscribe((response) => {
       if (response.success) {
         this.users = response.users;
         this.dataSource = new MatTableDataSource(this.users);
@@ -48,7 +51,7 @@ export class UsersComponent implements OnInit {
   onPageChange(event) {
     this.pageSize = event.pageSize;
     this.currentPage = event.pageIndex + 1;
-    this.userServise.getUsers().subscribe((response) => {
+    this.userService.getUsers().subscribe((response) => {
       if (response.success) {
         this.users = response.users;
         this.dataSource = this.users;
@@ -61,4 +64,16 @@ export class UsersComponent implements OnInit {
 
   }
 
+  openDeletePopup(userId: string) {
+    let dialogRef = this.dialog.open(DeleteConfirmationComponent, { autoFocus: false });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.userService.deleteUser(userId).subscribe((response) => {
+          if (response.success) {
+            this.dataSource.data = this.dataSource.data.filter(user => user.id != userId );
+          }
+        });
+      }
+    });
+  }
 }

@@ -26,6 +26,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { UsersComponent } from './components/users/users.component';
 import { JwtInterceptor } from './interceptors/jwt-interceptor';
 import { AdminGuard } from './guards/admin-guard';
+import { DeleteConfirmationComponent } from './components/delete-confirmation/delete-confirmation.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { AdminGuard } from './guards/admin-guard';
     RangeComponent,
     RegistrationComponent,
     LoginComponent,
-    UsersComponent
+    UsersComponent,
+    DeleteConfirmationComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +58,7 @@ import { AdminGuard } from './guards/admin-guard';
     BrowserAnimationsModule,
     MatNativeDateModule,
     MaterialExampleModule,
+
   ],
   providers: [PaintingService, UserService, CookieService, 
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}, AdminGuard],

@@ -114,18 +114,3 @@ export class PersonalInfoComponent implements OnInit {
 
 }
 
-// @Component({
-//   selector: 'personal-info-dialog',
-//   templateUrl: './personal-info-dialog.html',
-// })
-// export class PersonalInfoDialog {
-//   constructor(
-//     public dialogRef: MatDialogRef<PersonalInfoDialog>,
-//     @Inject(MAT_DIALOG_DATA) public data: PenisDialogModel,
-//   ) {}
-
-//   onNoClick(): void {
-//     this.dialogRef.close();
-//   }
-// }
-

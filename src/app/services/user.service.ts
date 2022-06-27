@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { HOST } from '../constants/urls';
 import { AuthUser } from '../models/auth-user';
 import { AuthUserResponse } from '../models/auth-user-response';
+import { BaseResponse } from '../models/base-response';
 import { User } from '../models/user';
 import { UserResponse } from '../models/user-response';
 import { UsersResponse } from '../models/users-response';
@@ -30,5 +31,9 @@ export class UserService {
 
   getUsers(): Observable<UsersResponse> {
     return this.http.get<UsersResponse>(HOST + '/users');
+  }
+
+  deleteUser(userId): Observable<BaseResponse> {
+    return this.http.delete<BaseResponse>(HOST + '/users/' + userId);
   }
 }

@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit {
   }
 
   openLoginPopup() {
-    this.dialog.open(LoginComponent);
+    this.dialog.open(LoginComponent, { autoFocus: false});
   }
 
   getUserFullName() {

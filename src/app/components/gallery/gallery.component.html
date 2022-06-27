@@ -15,13 +15,13 @@
     <div class="filter">
       <button mat-raised-button [matMenuTriggerFor]="sizes">Sizes</button>
       <mat-menu #sizes>
-        <div class="filter-popup" (click)="$event.stopPropagation()">
+        <div (click)="$event.stopPropagation()">
           <app-range [label]="'Wihth'" [placeholder1]="parameters.minWidth + 'cm'"
             [formControl1]="form.get('width_from')" [placeholder2]="parameters.maxWidth + 'cm'"
             [formControl2]="form.get('width_to')">
           </app-range>
         </div>
-        <div class="filter-popup" (click)="$event.stopPropagation()">
+        <div (click)="$event.stopPropagation()">
           <app-range [label]="'Height'" [placeholder1]="parameters.minHeight + 'cm'"
             [formControl1]="form.get('height_from')" [placeholder2]="parameters.maxHeight + 'cm'"
             [formControl2]="form.get('height_to')">
@@ -33,7 +33,7 @@
     <div class="filter">
       <button mat-raised-button [matMenuTriggerFor]="price">Price</button>
       <mat-menu #price>
-        <div class="filter-popup" (click)="$event.stopPropagation()">
+        <div (click)="$event.stopPropagation()">
           <app-range [label]="'Price'" [placeholder1]="parameters.minPrice + ' BYN'"
             [formControl1]="form.get('price_from')" [placeholder2]="parameters.maxPrice + ' BYN'"
             [formControl2]="form.get('price_to')">
