@@ -32,6 +32,7 @@ export class HeaderComponent implements OnInit {
   logOut() {
     this.contextService.setUser(null);
     this.contextService.setAuthToken('');
+    this.router.navigate(['gallery']);
   }
 
 }

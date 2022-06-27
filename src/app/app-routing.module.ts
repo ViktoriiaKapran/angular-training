@@ -6,6 +6,7 @@ import { PersonalInfoComponent } from './components/personal-info/personal-info.
 import { ProductPageComponent } from './components/product-page/product-page.component';
 import { ProductsComponent } from './components/products/products.component';
 import { RegistrationComponent } from './components/registration/registration.component';
+import { UserComponent } from './components/user/user.component';
 import { UsersComponent } from './components/users/users.component';
 import { AdminGuard } from './guards/admin-guard';
 
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'gallery/:id', component: PaintingPageComponent},
   { path: 'registration', component: RegistrationComponent},
   { path: 'users', component: UsersComponent, canActivate: [AdminGuard]},
+  { path: 'users/:id', component: UserComponent},
 ];
 
 @NgModule({

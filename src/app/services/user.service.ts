@@ -36,4 +36,8 @@ export class UserService {
   deleteUser(userId): Observable<BaseResponse> {
     return this.http.delete<BaseResponse>(HOST + '/users/' + userId);
   }
+
+  updateUser(user: User): Observable<UserResponse> {
+    return this.http.put<UserResponse>(HOST + '/users/' + user.id, user);
+  }
 }

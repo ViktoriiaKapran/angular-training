@@ -12,7 +12,7 @@
     <mat-icon>keyboard_arrow_down</mat-icon>
   </button>
   <mat-menu #menu>
-    <button mat-menu-item>
+    <button mat-menu-item [routerLink]="'/users/' + contextService.getUser()?.id">
       <mat-icon>portrait</mat-icon>
       My profile
     </button>

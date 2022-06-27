@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confirmation.component';
@@ -24,7 +25,7 @@ export class UsersComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<User>;
 
-  constructor(private userService: UserService, public dialog: MatDialog) { }
+  constructor(private userService: UserService, public dialog: MatDialog, private router: Router) { }
 
   ngOnInit(): void {
     this.userService.getUsers().subscribe((response) => {
@@ -60,8 +61,8 @@ export class UsersComponent implements OnInit {
     })
   }
 
-  goToEdit() {
-
+  goToEdit(id: string) {
+    this.router.navigate(['users/', id]);
   }
 
   openDeletePopup(userId: string) {

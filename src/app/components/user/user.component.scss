@@ -1,0 +1,20 @@
+.edit-page {
+  margin: 10px 10px 0 10px;
+  .edit {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    .button {
+      background-color: #470ed6;
+      color: #fff;
+      width: 250px;
+      margin: 12px auto;
+    }
+  }
+  .field {
+    .example-full-width {
+      width: 100%;
+    }
+  }
+
+}

@@ -27,6 +27,7 @@ import { UsersComponent } from './components/users/users.component';
 import { JwtInterceptor } from './interceptors/jwt-interceptor';
 import { AdminGuard } from './guards/admin-guard';
 import { DeleteConfirmationComponent } from './components/delete-confirmation/delete-confirmation.component';
+import { UserComponent } from './components/user/user.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { DeleteConfirmationComponent } from './components/delete-confirmation/de
     RegistrationComponent,
     LoginComponent,
     UsersComponent,
-    DeleteConfirmationComponent
+    DeleteConfirmationComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
