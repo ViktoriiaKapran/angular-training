@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { ContextService } from 'src/app/services/context.service';
 import { UserService } from 'src/app/services/user.service';
+import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confirmation.component';
 
 class SelectableItem {
   value: string;
@@ -22,11 +25,16 @@ export class UserComponent implements OnInit {
   ]
   id: string;
   form: FormGroup;
+  changePasswordForm: FormGroup;
+  hide = true;
+  selectedTab: string = 'general';
+  isCurrentUser: boolean;
 
-  constructor(private formBuilder: FormBuilder,private userService: UserService,
-    private activateRoute: ActivatedRoute, private contextService: ContextService,) {
-      this.id = activateRoute.snapshot.params['id'];
-    }
+  constructor(private formBuilder: FormBuilder, private userService: UserService,
+    private activateRoute: ActivatedRoute, private contextService: ContextService,
+    private _snackBar: MatSnackBar, public dialog: MatDialog, private router: Router) {
+    this.id = activateRoute.snapshot.params['id'];
+  }
 
   ngOnInit(): void {
     let user: User;
@@ -45,9 +53,44 @@ export class UserComponent implements OnInit {
       if (this.contextService.getUser().role == 'Admin') {
         this.form.addControl('role', new FormControl(user?.role, [Validators.required]));
       }
-    })
-
+      this.isCurrentUser = this.form.get('id').value == this.contextService.getUser().id;
+      if (this.isCurrentUser) {
+        this.changePasswordForm = this.formBuilder.group({
+          password: ["", [Validators.required, Validators.pattern(new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=^.{6,128}$)'))]],
+          confirmPassword: ["", [Validators.required, this.matchPassword]]
+        });
+      }
+    });
   }
+
+  changePassword() {
+    if (this.changePasswordForm.invalid) {
+      Object.keys(this.form.controls).forEach((controlName) => {
+        this.form.get(controlName).markAsTouched();
+      });
+      return;
+    }
+    let user = {
+      id: this.form.get('id').value,
+      password: this.changePasswordForm.get('password').value
+    }
+    this.userService.changeUserPassword(user).subscribe((response) => {
+      if (response.success) {
+        this.openSnackBar('Password changed');
+      }
+    })
+  }
+
+  matchPassword(control: FormControl): ValidationErrors {
+    if (control.value) {
+      const passwordValue = control.parent.get('password')?.value;
+      if (control.value !== passwordValue) {
+        return { passwordMismatch: true };
+      }
+    }
+    return null;
+  }
+
   updateUser() {
     if (this.form.invalid) {
       Object.keys(this.form.controls).forEach((controlName) => {
@@ -56,9 +99,32 @@ export class UserComponent implements OnInit {
       return;
     }
     this.userService.updateUser(this.form.value).subscribe((response) => {
-      // todo snackbar
+      this.openSnackBar('Saved');
     });
   }
 
+  openSnackBar(message: string) {
+    this._snackBar.open(message);
+  }
+
+  openDeletePopup() {
+    let dialogRef = this.dialog.open(DeleteConfirmationComponent, { autoFocus: false });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.userService.deleteUser(this.form.get('id').value).subscribe((response) => {
+          if (response.success) {
+            if (this.form.get('id').value == this.contextService.getUser().id) {
+              this.contextService.setUser(null);
+              this.contextService.setAuthToken('');
+              this.router.navigate(['gallery']);
+            }
+            if (this.contextService.getUser().role == 'Admin') {
+              this.router.navigate(['users']);
+            }
+          }
+        });
+      }
+    });
+  }
 
 }

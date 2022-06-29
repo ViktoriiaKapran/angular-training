@@ -1,67 +1,112 @@
 <div class="edit-page">
-  <mat-card *ngIf="form">
-    <div class="edit">
-      <div>
-        <div class="field">
-          <mat-form-field class="example-full-width">
-            <mat-label>First name</mat-label>
-            <input matInput type="text" [formControl]="form.get('firstName')">
-            <mat-error *ngIf="form.get('firstName').hasError('required')">
-              First name is <strong>required</strong>
-            </mat-error>
-          </mat-form-field>
-        </div>
+  <div class="cards">
+    <mat-card *ngIf="form && selectedTab == 'general'">
+      <div class="edit">
+        <div>
+          <div class="field">
+            <mat-form-field class="example-full-width">
+              <mat-label>First name</mat-label>
+              <input matInput type="text" [formControl]="form.get('firstName')">
+              <mat-error *ngIf="form.get('firstName').hasError('required')">
+                First name is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
 
-        <div class="field">
-          <mat-form-field class="example-full-width">
-            <mat-label>Last name</mat-label>
-            <input matInput type="text" [formControl]="form.get('lastName')">
-            <mat-error *ngIf="form.get('lastName').hasError('required')">
-              First name is <strong>required</strong>
-            </mat-error>
-          </mat-form-field>
-        </div>
+          <div class="field">
+            <mat-form-field class="example-full-width">
+              <mat-label>Last name</mat-label>
+              <input matInput type="text" [formControl]="form.get('lastName')">
+              <mat-error *ngIf="form.get('lastName').hasError('required')">
+                First name is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
 
-        <div class="field">
-          <mat-form-field class="example-full-width">
-            <mat-label>Phone number</mat-label>
-            <input type="tel" matInput [formControl]="form.get('phone')">
-            <mat-error
-              *ngIf="form.get('phone').hasError('pattern') && !form.get('phone').hasError('required')">
-              Please enter a valid number
-            </mat-error>
-            <mat-error *ngIf="form.get('phone').hasError('required')">
-              Number is <strong>required</strong>
-            </mat-error>
-          </mat-form-field>
-        </div>
+          <div class="field">
+            <mat-form-field class="example-full-width">
+              <mat-label>Phone number</mat-label>
+              <input type="tel" matInput [formControl]="form.get('phone')">
+              <mat-error *ngIf="form.get('phone').hasError('pattern') && !form.get('phone').hasError('required')">
+                Please enter a valid number
+              </mat-error>
+              <mat-error *ngIf="form.get('phone').hasError('required')">
+                Number is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
 
-        <div class="field">
-          <mat-form-field class="example-full-width">
-            <mat-label>Email</mat-label>
-            <input matInput type="email" [formControl]="form.get('email')">
-            <mat-error *ngIf="form.get('email').hasError('email') && !form.get('email').hasError('required')">
-              Please enter a valid email address
-            </mat-error>
-            <mat-error *ngIf="form.get('email').hasError('required')">
-              Email is <strong>required</strong>
-            </mat-error>
-          </mat-form-field>
-        </div>
+          <div class="field">
+            <mat-form-field class="example-full-width">
+              <mat-label>Email</mat-label>
+              <input matInput type="email" [formControl]="form.get('email')">
+              <mat-error *ngIf="form.get('email').hasError('email') && !form.get('email').hasError('required')">
+                Please enter a valid email address
+              </mat-error>
+              <mat-error *ngIf="form.get('email').hasError('required')">
+                Email is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
 
-        <div class="field" *ngIf="form.get('role')">
-          <mat-form-field class="example-full-width">
-            <mat-label>Role</mat-label>
-            <mat-select [formControl]="form.get('role')">
-              <mat-option *ngFor="let role of roles" [value]="role.value">
-                {{role.viewValue}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+          <div class="field" *ngIf="form.get('role')">
+            <mat-form-field class="example-full-width">
+              <mat-label>Role</mat-label>
+              <mat-select [formControl]="form.get('role')">
+                <mat-option *ngFor="let role of roles" [value]="role.value">
+                  {{role.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
         </div>
+        <button class="submit" mat-raised-button (click)="updateUser()">Submit</button>
       </div>
-      <button class="button" mat-raised-button (click)="updateUser()">Submit</button>
-    </div>
-  </mat-card>
+    </mat-card>
+    <mat-card *ngIf="changePasswordForm && selectedTab == 'change'">
+      <div class="field">
+        <mat-form-field class="example-full-width">
+          <mat-label>New password</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" [formControl]="changePasswordForm.get('password')">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error *ngIf="changePasswordForm.get('password').hasError('pattern') && !changePasswordForm.get('password').hasError('required')">
+            Minimum eight characters, at least one letter and one number
+          </mat-error>
+          <mat-error *ngIf="changePasswordForm.get('password').hasError('required')">
+            Password is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+  
+      <div class="field">
+        <mat-form-field class="example-full-width">
+          <mat-label>Confirm new password</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" [formControl]="changePasswordForm.get('confirmPassword')">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error
+            *ngIf="changePasswordForm.get('confirmPassword').hasError('passwordMismatch') && !changePasswordForm.get('confirmPassword').hasError('required')">
+            Minimum eight characters, at least one letter and one number
+          </mat-error>
+          <mat-error *ngIf="changePasswordForm.get('confirmPassword').hasError('required')">
+            Password is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <button mat-raised-button class="submit" (click)="changePassword()">Change Password</button>
+    </mat-card>
 
+    <mat-card class="buttons">
+        <button class="button" (click)="selectedTab = 'general'" mat-menu-item>General information</button>
+        <button class="button" *ngIf="isCurrentUser" (click)="selectedTab = 'change'" mat-menu-item>Change password</button>
+        <button class="button" mat-menu-item>View uploaded artworks</button>
+    </mat-card>
+  </div>
+  <button class="delete-button" mat-menu-item (click)="openDeletePopup()">Delete the account
+  </button>
 </div>

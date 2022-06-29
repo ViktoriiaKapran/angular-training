@@ -1,20 +1,47 @@
 .edit-page {
   margin: 10px 10px 0 10px;
-  .edit {
+  .cards {
     display: flex;
     justify-content: center;
-    flex-direction: column;
-    .button {
-      background-color: #470ed6;
-      color: #fff;
-      width: 250px;
-      margin: 12px auto;
+    width: 100%;
+    .edit {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
     }
   }
+
   .field {
+    width: 1000px;
     .example-full-width {
       width: 100%;
     }
+  }
+  .buttons {
+    max-height: 170px;
+    height: 100%;
+    max-width: 220px;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    .button {
+      text-align: center;
+    }
+  }
+
+  .delete-button {
+    font-size: 12px;
+    text-align: center;
+    color:rgb(110, 110, 110);
+    width: 150px;
+    margin: 0 auto;
+  }
+
+  .submit {
+    background-color: #470ed6;
+    color: #fff;
+    width: 250px;
+    margin: 12px auto;
   }
 
 }

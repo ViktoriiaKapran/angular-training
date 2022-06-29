@@ -40,4 +40,8 @@ export class UserService {
   updateUser(user: User): Observable<UserResponse> {
     return this.http.put<UserResponse>(HOST + '/users/' + user.id, user);
   }
+
+  changeUserPassword(user: User): Observable<UserResponse> {
+    return this.http.put<UserResponse>(HOST + '/users/' + user.id + '/change-password', user);
+  }
 }
