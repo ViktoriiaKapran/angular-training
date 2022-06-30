@@ -1,25 +1,22 @@
-import { TitleCasePipe } from '@angular/common';
-import { ArrayType } from '@angular/compiler';
-import { Component, EventEmitter, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MAT_CALENDAR_RANGE_STRATEGY_PROVIDER } from '@angular/material/datepicker/date-range-selection-strategy';
+import { ActivatedRoute, Router, } from '@angular/router';
 import { Painting } from 'src/app/models/painting';
 import { PaintingsParameters } from 'src/app/models/paintings-parameters';
-import { PaintingsResponse } from 'src/app/models/paintings-response';
 import { PaintingService } from 'src/app/services/painting.service';
+
 
 @Component({
   selector: 'app-gallery',
   templateUrl: './gallery.component.html',
   styleUrls: ['./gallery.component.scss'],
-  encapsulation: ViewEncapsulation.None
 })
 export class GalleryComponent implements OnInit {
 
   paintings: Painting[];
   form: FormGroup;
   parameters: PaintingsParameters;
-  genres: string[] = ['Abstract', 'Still life', 'Landscape', 'Portrait', 'Genre art',
+  genresArr: string[] = ['Abstract', 'Still life', 'Landscape', 'Portrait', 'Genre art',
     'Historical', 'Animalism', 'Nude'];
   selectedGenres: string[] = [];
   paintingsCount: number;
@@ -27,9 +24,11 @@ export class GalleryComponent implements OnInit {
   pageSizeOptions: number[] = [12, 24];
   currentPage: number = 1;
   loading: boolean;
+  snapshot;
 
 
-  constructor(private paintingService: PaintingService, private formBuilder: FormBuilder) { }
+  constructor(private paintingService: PaintingService, private formBuilder: FormBuilder,
+    private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -40,6 +39,14 @@ export class GalleryComponent implements OnInit {
       height_from: [],
       height_to: [],
     });
+    this.snapshot = this.router.routerState.snapshot.root?.queryParams;
+    this.form.get('price_from').setValue(this.snapshot['price_from']);
+    this.form.get('price_to').setValue(this.snapshot['price_to']);
+    this.form.get('width_from').setValue(this.snapshot['width_from']);
+    this.form.get('width_to').setValue(this.snapshot['width_to']);
+    this.form.get('height_from').setValue(this.snapshot['height_from']);
+    this.form.get('height_to').setValue(this.snapshot['height_to']);
+    this.selectedGenres = this.snapshot['genres'] || [];
     this.getPaintings();
     this.paintingService.getPaintingsParameters().subscribe((response) => {
       if (response.success) {
@@ -56,6 +63,24 @@ export class GalleryComponent implements OnInit {
         this.paintingsCount = response.count;
       }
       this.loading = false;
+      this.apply();
+    });
+
+  }
+
+  apply() {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {
+        'genres': this.selectedGenres,
+        'width_from': this.form.get('width_from')?.value,
+        'width_to': this.form.get('width_to')?.value,
+        'hight_from': this.form.get('hight_from')?.value,
+        'hight_to': this.form.get('hight_to')?.value,
+        'price_from': this.form.get('price_from')?.value,
+        'price_to': this.form.get('price_to')?.value
+      },
+      queryParamsHandling: 'merge'
     });
   }
 
@@ -76,8 +101,9 @@ export class GalleryComponent implements OnInit {
   }
 
   clear() {
-    this.form.reset();
-    this.getPaintings();
+    // this.form.reset();
+    // this.getPaintings();
+    window.location.search = '';
   }
 
   setSelectedGenres(selectedGenre: string) {

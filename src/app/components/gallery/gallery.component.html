@@ -5,7 +5,7 @@
       <button mat-raised-button [matMenuTriggerFor]="genresPopup">Genres</button>
       <mat-menu #genresPopup>
         <div class="filter-popup" (click)="$event.stopPropagation()">
-          <mat-checkbox *ngFor="let genre of genres" (change)="setSelectedGenres(genre)">
+          <mat-checkbox *ngFor="let genre of genresArr" (change)="setSelectedGenres(genre)">
             {{genre}}
           </mat-checkbox>
         </div>
