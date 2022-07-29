@@ -104,7 +104,7 @@
     <mat-card class="buttons">
         <button class="button" (click)="selectedTab = 'general'" mat-menu-item>General information</button>
         <button class="button" *ngIf="isCurrentUser" (click)="selectedTab = 'change'" mat-menu-item>Change password</button>
-        <button class="button" mat-menu-item>View uploaded artworks</button>
+        <button class="button" mat-menu-item (click)="goToPaintingsByUserId()">View uploaded artworks</button>
     </mat-card>
   </div>
   <button class="delete-button" mat-menu-item (click)="openDeletePopup()">Delete the account

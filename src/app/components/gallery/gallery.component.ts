@@ -25,6 +25,7 @@ export class GalleryComponent implements OnInit {
   currentPage: number = 1;
   loading: boolean;
   snapshot;
+  userId: string;
 
 
   constructor(private paintingService: PaintingService, private formBuilder: FormBuilder,
@@ -47,6 +48,7 @@ export class GalleryComponent implements OnInit {
     this.form.get('height_from').setValue(this.snapshot['height_from']);
     this.form.get('height_to').setValue(this.snapshot['height_to']);
     this.selectedGenres = this.snapshot['genres'] || [];
+    this.userId = this.snapshot['userId'];
     this.getPaintings();
     this.paintingService.getPaintingsParameters().subscribe((response) => {
       if (response.success) {
@@ -97,6 +99,9 @@ export class GalleryComponent implements OnInit {
     }
     result['page'] = this.currentPage;
     result['limit'] = this.pageSize;
+    if (this.userId) {
+      result['userId'] = this.userId;
+    }
     return result;
   }
 

@@ -107,6 +107,10 @@ export class UserComponent implements OnInit {
     this._snackBar.open(message);
   }
 
+  goToPaintingsByUserId() {
+    this.router.navigate(['gallery'], {queryParams: {userId: this.id}});
+  }
+
   openDeletePopup() {
     let dialogRef = this.dialog.open(DeleteConfirmationComponent, { autoFocus: false });
     dialogRef.afterClosed().subscribe((result) => {
