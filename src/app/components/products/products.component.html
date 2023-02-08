@@ -1,8 +1,0 @@
-<div class="products" [class.green]="greenBackground">
-  <div class="products__content">
-    <div *ngFor="let product of products; let i = index" class="products__product">
-      <app-product-card (isOpenedChange)="changeColor($event)" [product]="product" [index]="i"></app-product-card>
-    </div>
-  </div>
-</div>
-

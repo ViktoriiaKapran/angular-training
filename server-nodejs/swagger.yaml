@@ -1,0 +1,549 @@
+swagger: "2.0"
+info:
+  description: ""
+  version: "1.0.0"
+  title: "Bohian-art API"
+host: "localhost:3000"
+basePath: "/"
+tags:
+  - name: "Users"
+    description: "User management"
+  - name: "Paintings"
+    description: "Painting Management"
+schemes:
+  - "https"
+  - "http"
+paths:
+  /users/auth:
+    post:
+      summary: "Authorize user"
+      operationId: "auth"
+      tags:
+        - "Users"
+      parameters:
+        - in: "body"
+          name: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/AuthUser"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/AuthUserResponse"
+        401:
+          description: "Invalid credentials"
+  /users:
+    get:
+      summary: "Get all users"
+      operationId: "getAllUsers"
+      tags:
+        - "Users"
+      security:
+        - bearer_auth: []
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/UsersResponse"
+        401:
+          description: "Unauthorized"
+    post:
+      summary: "Create a new user"
+      operationId: "createUser"
+      tags:
+        - "Users"
+      parameters:
+        - in: "body"
+          name: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/User"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/AuthUserResponse"
+        400:
+          description: "Such user have already created"
+  /users/{userId}:
+    get:
+      summary: "Get the user by id"
+      operationId: "getUser"
+      tags:
+        - "Users"
+      parameters:
+        - name: "userId"
+          in: "path"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/UserResponse"
+        401:
+          description: "Unauthorized"
+    put:
+      summary: "Update the user"
+      operationId: "updateUser"
+      tags:
+        - "Users"
+      security:
+        - bearer_auth: []
+      parameters:
+        - name: "userId"
+          in: "path"
+          required: true
+          type: "string"
+        - name: "body"
+          in: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/User"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/UserResponse"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+    delete:
+      summary: "Delete the user"
+      operationId: "deleteUser"
+      tags:
+        - "Users"
+      security:
+        - bearer_auth: []
+      parameters:
+        - name: "userId"
+          in: "path"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/BaseResponse"
+        401:
+          description: "Unauthorized"
+  /users/{userId}/change-password:
+    put:
+      summary: "Change user password"
+      operationId: "changePassword"
+      tags:
+        - "Users"
+      security:
+        - bearer_auth: []
+      parameters:
+        - name: "userId"
+          in: "path"
+          required: true
+          type: "string"
+        - name: "body"
+          in: "body"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              password:
+                type: "string"
+            required:
+              - "password"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/UserResponse"
+        401:
+          description: "Unauthorized"
+  /paintings:
+    get:
+      summary: "Get all paintings"
+      operationId: "getAllPaintings"
+      tags:
+        - "Paintings"
+      parameters:
+        - in: "query"
+          name: "page"
+          type: "integer"
+        - in: "query"
+          name: "limit"
+          type: "integer"
+        - in: "query"
+          name: "userId"
+          type: "string"
+        - in: "query"
+          name: "price_from"
+          type: "integer"
+        - in: "query"
+          name: "price_to"
+          type: "integer"
+        - in: "query"
+          name: "width_from"
+          type: "integer"
+        - in: "query"
+          name: "width_to"
+          type: "integer"
+        - in: "query"
+          name: "height_from"
+          type: "integer"
+        - in: "query"
+          name: "height_to"
+          type: "integer"
+        - in: "query"
+          name: "genres"
+          type: "string"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/PaintingsResponse"
+    post:
+      summary: "Upload a new painting"
+      operationId: "uploadPainting"
+      tags:
+        - "Paintings"
+      security:
+        - bearer_auth: []
+      consumes:
+        - "multipart/form-data"
+      parameters:
+        - in: "formData"
+          name: "image"
+          type: "file"
+          required: true
+        - in: "formData"
+          name: "name"
+          type: "string"
+          required: true
+        - in: "formData"
+          name: "author"
+          type: "string"
+          required: true
+        - in: "formData"
+          name: "userId"
+          type: "string"
+          required: true
+        - in: "formData"
+          name: "genres"
+          type: "string"
+          required: true
+        - in: "formData"
+          name: "height"
+          type: "integer"
+          required: true
+        - in: "formData"
+          name: "width"
+          type: "integer"
+          required: true
+        - in: "formData"
+          name: "price"
+          type: "number"
+          required: true
+        - in: "formData"
+          name: "description"
+          type: "string"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/PaintingResponse"
+        401:
+          description: "Unauthorized"
+  /paintings/parameters:
+    get:
+      summary: "Get paintings parameters"
+      operationId: "getParameters"
+      tags:
+        - "Paintings"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/PaintingsParametersResponse"
+  /paintings/{paintingId}:
+    get:
+      summary: "Get the painting by id"
+      operationId: "getPainting"
+      tags:
+        - "Paintings"
+      parameters:
+        - name: "paintingId"
+          in: "path"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/PaintingResponse"
+    put:
+      summary: "Update a new painting"
+      operationId: "updatePainting"
+      tags:
+        - "Paintings"
+      security:
+        - bearer_auth: []
+      consumes:
+        - "multipart/form-data"
+      parameters:
+        - name: "paintingId"
+          in: "path"
+          required: true
+          type: "string"
+        - in: "formData"
+          name: "image"
+          type: "file"
+          required: false
+        - in: "formData"
+          name: "name"
+          type: "string"
+          required: true
+        - in: "formData"
+          name: "author"
+          type: "string"
+          required: true
+        - in: "formData"
+          name: "userId"
+          type: "string"
+          required: true
+        - in: "formData"
+          name: "genres"
+          type: "string"
+          required: true
+        - in: "formData"
+          name: "height"
+          type: "integer"
+          required: true
+        - in: "formData"
+          name: "width"
+          type: "integer"
+          required: true
+        - in: "formData"
+          name: "price"
+          type: "number"
+          required: true
+        - in: "formData"
+          name: "description"
+          type: "string"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/PaintingResponse"
+        401:
+          description: "Unauthorized"
+    delete:
+      summary: "Delete the painting"
+      operationId: "deletePainting"
+      tags:
+        - "Paintings"
+      security:
+        - bearer_auth: []
+      parameters:
+        - name: "paintingId"
+          in: "path"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/BaseResponse"
+        401:
+          description: "Unauthorized"
+securityDefinitions:
+  bearer_auth:
+    type: "apiKey"
+    name: "Authorization"
+    in: "header"
+definitions:
+  BaseResponse:
+    type: "object"
+    properties:
+      success:
+        type: "boolean"
+      errorMessage:
+        type: "string"
+    required:
+      - "success"
+      - "errorMessage"
+  AuthUser:
+    type: "object"
+    properties:
+      email:
+        type: "string"
+      password:
+        type: "string"
+        format: "password"
+    required:
+      - "email"
+      - "password"
+  AuthUserResponse:
+    type: "object"
+    properties:
+      user:
+        $ref: "#/definitions/User"
+      token:
+        type: "string"
+      success:
+        type: "boolean"
+      errorMessage:
+        type: "string"
+    required:
+      - "user"
+      - "token"
+      - "success"
+      - "errorMessage"
+  User:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      email:
+        type: "string"
+      password:
+        type: "string"
+        format: "password"
+      firstName:
+        type: "string"
+      lastName:
+        type: "string"
+      role:
+        type: "string"
+      phone:
+        type: "string"
+    required:
+      - "email"
+      - "password"
+      - "firstName"
+      - "lastName"
+      - "role"
+  UserResponse:
+    type: "object"
+    properties:
+      user:
+        $ref: "#/definitions/User"
+      success:
+        type: "boolean"
+      errorMessage:
+        type: "string"
+    required:
+      - "user"
+      - "success"
+      - "errorMessage"
+  UsersResponse:
+    type: "object"
+    properties:
+      users:
+        type: "array"
+        items:
+          $ref: "#/definitions/User"
+      success:
+        type: "boolean"
+      errorMessage:
+        type: "string"
+    required:
+      - "users"
+      - "success"
+      - "errorMessage"
+  Painting:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      image:
+        type: "object"
+        properties:
+          name:
+            type: "string"
+          contentType:
+            type: "string"
+          data:
+            type: "string"
+      name:
+        type: "string"
+      author:
+        type: "string"
+      userId:
+        type: "string"
+      genres:
+        type: "array"
+        items:
+          type: "string"
+      height:
+        type: "integer"
+      width:
+        type: "integer"
+      price:
+        type: "number"
+      description:
+        type: "string"
+    required:
+      - "name"
+      - "image"
+      - "author"
+      - "userId"
+      - "genres"
+      - "height"
+      - "width"
+      - "price"
+  PaintingResponse:
+    type: "object"
+    properties:
+      painting:
+        $ref: "#/definitions/Painting"
+      success:
+        type: "boolean"
+      errorMessage:
+        type: "string"
+    required:
+      - "painting"
+      - "success"
+      - "errorMessage"
+  PaintingsResponse:
+    type: "object"
+    properties:
+      paintings:
+        type: "array"
+        items:
+          $ref: "#/definitions/Painting"
+      count:
+        type: "integer"
+      totalPages:
+        type: "integer"
+      currentPage:
+        type: "integer"
+      success:
+        type: "boolean"
+      errorMessage:
+        type: "string"
+    required:
+      - "paintings"
+      - "success"
+      - "errorMessage"
+  PaintingsParametersResponse:
+    type: "object"
+    properties:
+      minPrice:
+        type: "number"
+      maxPrice:
+        type: "number"
+      minWidth:
+        type: "integer"
+      maxWidth:
+        type: "integer"
+      minHeight:
+        type: "integer"
+      maxHeight:
+        type: "integer"
+    required:
+      - "minPrice"
+      - "maxPrice"
+      - "minWidth"
+      - "maxWidth"
+      - "minHeight"
+      - "maxHeight"
